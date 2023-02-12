@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import Rockets from './components/Rockets.vue';
 </script>
 
 <template>
-  <div>hej</div>
+  <Rockets />
 </template>
 
 <style scoped>
