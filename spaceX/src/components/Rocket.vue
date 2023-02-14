@@ -1,16 +1,18 @@
 <template>
     <h1>{{ rocket.rocket_name }}</h1>
+    <p>{{ rocket.description }}</p>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue';
-//import { SpaceXRocket } from '../types/SpaceXRocket';
+import type { PropType } from 'vue';
+import type { SpaceXRocket } from '../types/SpaceXRocket';
 
 export default defineComponent({
     name: 'Rocket',
     props: {
         rocket: {
             required: true,
-            type: Object
+            type: Object as PropType<SpaceXRocket>
         }
     }
 
