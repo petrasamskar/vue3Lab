@@ -12,7 +12,6 @@
 import { defineComponent, computed } from 'vue';
 import Rocket from './Rocket.vue';
 import { ref } from 'vue';
-import type { SpaceXRocket } from '@/types/SpaceXRocket';
 import { useStore } from 'vuex'; 
 import type { State } from '../store/store'
 
