@@ -1,17 +1,23 @@
 <template>
   <div class="container">
-    <p>
+    <div class="buttons">
       <button
         @click="getAllRockets()"
         class="button is-medium button is-success is-light"
       >
         Show all rockets
       </button>
-    </p>
-    <div v-if="error">{{ error }}</div>
-    <div v-for="rocket in rockets">
-      <Rocket :rocket="rocket" />
+      <button
+        @click="close()"
+        class="button is-medium button is-danger is-light"
+      >
+        Close
+      </button>
     </div>
+    <div v-if="error">{{ error }}</div>
+    <section v-for="rocket in rockets" :style="opened">
+      <Rocket :rocket="rocket" />
+    </section>
   </div>
 </template>
 <script lang="ts">
@@ -26,6 +32,7 @@ export default defineComponent({
   components: { Rocket },
   setup() {
     const error = ref("");
+    const opened = ref("");
     const store = useStore<State>();
     const getAllRockets = async () => {
       try {
@@ -36,16 +43,22 @@ export default defineComponent({
           }
           store.commit("setRockets", await data.json());
         }
+        opened.value = "";
       } catch (err: any) {
         error.value = err.message;
         console.log(err);
       }
+    };
+    const close = () => {
+      opened.value = "display:none";
     };
     const rockets = computed(() => store.state.rockets);
     return {
       rockets,
       error,
       getAllRockets,
+      opened,
+      close,
     };
   },
 });

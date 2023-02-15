@@ -1,10 +1,16 @@
 <template>
-  <section class="section">
-    <Rockets />
-  </section>
-  <section class="section">
-    <Missions />
-  </section>
+  <div class="columns">
+    <div class="column">
+      <section class="section">
+        <Rockets />
+      </section>
+    </div>
+    <div class="column">
+      <section class="section">
+        <Missions />
+      </section>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">

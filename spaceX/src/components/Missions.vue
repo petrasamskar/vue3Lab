@@ -1,15 +1,21 @@
 <template>
   <div class="container">
-    <p>
+    <div class="buttons">
       <button
         @click="getAllMissions()"
         class="button is-medium button is-success is-light"
       >
         Show all missions
       </button>
-    </p>
+      <button
+        @click="close()"
+        class="button is-medium button is-danger is-light"
+      >
+        Close
+      </button>
+    </div>
     <div v-if="error">{{ error }}</div>
-    <div v-for="mission in missions">
+    <div v-for="mission in missions" :style="opened">
       <Mission :mission="mission" />
     </div>
   </div>
@@ -27,6 +33,8 @@ export default defineComponent({
   setup() {
     const error = ref("");
     const store = useStore<State>();
+    const opened = ref("");
+
     const getAllMissions = async () => {
       try {
         if (missions.value.length === 0) {
@@ -36,16 +44,22 @@ export default defineComponent({
           }
           store.commit("setMissions", await data.json());
         }
+        opened.value = "";
       } catch (err: any) {
         error.value = err.message;
         console.log(err);
       }
+    };
+    const close = () => {
+      opened.value = "display:none";
     };
     const missions = computed(() => store.state.missions);
     return {
       missions,
       error,
       getAllMissions,
+      opened,
+      close,
     };
   },
 });

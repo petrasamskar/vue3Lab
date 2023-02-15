@@ -1,6 +1,20 @@
 <template>
-  <h1>{{ mission.mission_name }}</h1>
-  <p>{{ mission.description }}</p>
+  <div class="card">
+    <div class="card-image">
+      <figure class="image is-4by3">
+        <img
+          src="https://bulma.io/images/placeholders/1280x960.png"
+          alt="Placeholder image"
+        />
+      </figure>
+    </div>
+    <div class="card-content">
+      <p class="title is-4">{{ mission.mission_name }}</p>
+      <div class="content">
+        {{ mission.description }}
+      </div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
