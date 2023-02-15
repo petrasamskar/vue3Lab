@@ -5,8 +5,17 @@ export interface State {
     rockets: SpaceXRocket[]
 }
 
-export const store = createStore<State>( {
+const store = createStore<State>( {
     state: {
         rockets: [],        
+    },
+    mutations: {
+        setRockets(state, value) {
+            state.rockets = value
+        }
+    },
+    getters: {
+        rockets: state => state.rockets
     }
 })
+export default store

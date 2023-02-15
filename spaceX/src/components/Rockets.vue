@@ -9,31 +9,33 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, computed } from 'vue';
 import Rocket from './Rocket.vue';
 import { ref } from 'vue';
 import type { SpaceXRocket } from '@/types/SpaceXRocket';
-
+import { useStore } from 'vuex'; 
+import type { State } from '../store/store'
 
 export default defineComponent({
     name: "Rockets",
     components: { Rocket },
     setup() {
-        const rockets = ref<SpaceXRocket[]>([])
-        const error = ref<string>('')
+        const error = ref('')
+        const store = useStore<State>()
         const getAllRockets = async () => {
             try {
                 const data = await fetch('https://api.spacexdata.com/v3/rockets')
                 if (!data.ok) {
                     throw Error('No data available')
                 }
-                rockets.value = await data.json()
+                store.commit('setRockets', await data.json())
 
             } catch (err: any) {
                 error.value = err.message
                 console.log(err)
             }
         }
+        const rockets = computed(() => store.state.rockets)
         return {
             rockets, error, getAllRockets
         }
