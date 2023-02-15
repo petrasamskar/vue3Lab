@@ -1,6 +1,10 @@
 <template>
-  <Rockets />
-  <Missions />
+  <section class="section">
+    <Rockets />
+  </section>
+  <section class="section">
+    <Missions />
+  </section>
 </template>
 
 <script lang="ts">
