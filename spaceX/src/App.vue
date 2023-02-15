@@ -1,10 +1,21 @@
-<script setup lang="ts">
-import Rockets from './components/Rockets.vue';
-</script>
-
 <template>
   <Rockets />
 </template>
+
+<script lang="ts">
+import Rockets from './components/Rockets.vue';
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+  name: 'App',
+  components :{
+    Rockets
+  }
+
+})
+</script>
+
+
 
 <style scoped>
 header {

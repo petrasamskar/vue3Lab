@@ -13,7 +13,6 @@ import { defineComponent } from 'vue';
 import Rocket from './Rocket.vue';
 import { ref } from 'vue';
 import type { SpaceXRocket } from '@/types/SpaceXRocket';
-//import SpaceXRocket from '../types/SpaceXRocket'
 
 
 export default defineComponent({
