@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-image">
       <figure class="image is-4by3">
-        <img :src="rocket.flickr_images[0]" alt="Placeholder image" />
+        <img :src="rocket.flickr_images[0]" alt="No image available" />
       </figure>
     </div>
     <div class="card-content">

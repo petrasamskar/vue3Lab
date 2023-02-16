@@ -1,4 +1,5 @@
 <template>
+  <h1 class="title is-1">SpaceX Rockets and missions</h1>
   <div class="columns">
     <div class="column">
       <section class="section">

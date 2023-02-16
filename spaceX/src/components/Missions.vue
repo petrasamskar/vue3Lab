@@ -7,15 +7,9 @@
       >
         Show all missions
       </button>
-      <button
-        @click="close()"
-        class="button is-medium button is-danger is-light"
-      >
-        Close
-      </button>
     </div>
     <div v-if="error">{{ error }}</div>
-    <div v-for="mission in missions" :style="opened">
+    <div v-for="mission in missions" :style="style">
       <Mission :mission="mission" />
     </div>
   </div>
@@ -33,7 +27,7 @@ export default defineComponent({
   setup() {
     const error = ref("");
     const store = useStore<State>();
-    const opened = ref("");
+    const opened = ref(false);
 
     const getAllMissions = async () => {
       try {
@@ -44,22 +38,21 @@ export default defineComponent({
           }
           store.commit("setMissions", await data.json());
         }
-        opened.value = "";
+        opened.value = !opened.value;
       } catch (err: any) {
         error.value = err.message;
         console.log(err);
       }
     };
-    const close = () => {
-      opened.value = "display:none";
-    };
     const missions = computed(() => store.state.missions);
+    const style = computed(() => (opened.value ? "" : "display:none"));
     return {
       missions,
       error,
       getAllMissions,
       opened,
       close,
+      style,
     };
   },
 });
