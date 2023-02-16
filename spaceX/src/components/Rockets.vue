@@ -28,6 +28,7 @@ export default defineComponent({
     const error = ref("");
     const opened = ref(false);
     const store = useStore<State>();
+
     const getAllRockets = async () => {
       try {
         if (rockets.value.length === 0) {
@@ -43,12 +44,13 @@ export default defineComponent({
         console.log(err);
       }
     };
+
     const rockets = computed(() => store.state.rockets);
+    const style = computed(() => (opened.value ? "" : "display:none"));
 
     //rockets.value.push("")
     //opened.value = ""
 
-    const style = computed(() => (opened.value ? "" : "display:none"));
     return {
       rockets,
       error,

@@ -44,8 +44,10 @@ export default defineComponent({
         console.log(err);
       }
     };
+
     const missions = computed(() => store.state.missions);
     const style = computed(() => (opened.value ? "" : "display:none"));
+
     return {
       missions,
       error,
