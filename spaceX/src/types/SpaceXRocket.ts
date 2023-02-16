@@ -1,5 +1,5 @@
 export interface SpaceXRocket {
-  id: string;
+  id: number;
   rocket_name: string;
   description: string;
   wikipedia: string;
