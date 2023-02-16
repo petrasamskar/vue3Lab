@@ -44,6 +44,10 @@ export default defineComponent({
       }
     };
     const rockets = computed(() => store.state.rockets);
+
+    //rockets.value.push("")
+    //opened.value = ""
+
     const style = computed(() => (opened.value ? "" : "display:none"));
     return {
       rockets,

@@ -1,5 +1,5 @@
 <template>
-  <h1 class="title is-1">SpaceX Rockets and missions</h1>
+  <h1 class="title is-1">SpaceX Rockets and Missions</h1>
   <section>{{ description.summary }}</section>
   <div class="columns">
     <div class="column">
