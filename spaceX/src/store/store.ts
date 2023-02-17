@@ -1,4 +1,4 @@
-import { defineStore } from "pinia";
+import { defineStore, acceptHMRUpdate } from "pinia";
 import type { SpaceXRocket } from "@/types/SpaceXRocket";
 import type { SpaceXMission } from "@/types/SpaceXMission";
 import type { SpaceXInfo } from "@/types/SpaceXInfo";
@@ -21,3 +21,7 @@ export const useStore = defineStore("spacexstore", {
     },
   },
 });
+
+if (import.meta.hot) {
+  import.meta.hot.accept(acceptHMRUpdate(useStore, import.meta.hot));
+}

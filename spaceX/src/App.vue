@@ -1,6 +1,6 @@
 <template>
   <h1 class="title is-1">SpaceX Rockets and Missions</h1>
-  <section>{{ description.summary }}</section>
+  <section>{{ store.description.summary }}</section>
   <div class="columns">
     <div class="column">
       <section class="section">
@@ -18,7 +18,7 @@
 <script lang="ts">
 import Rockets from "./components/Rockets.vue";
 import Missions from "./components/Missions.vue";
-import { defineComponent, onMounted, computed, ref } from "vue";
+import { defineComponent, onMounted, ref } from "vue";
 import { useStore } from "./store/store";
 
 export default defineComponent({
@@ -33,7 +33,7 @@ export default defineComponent({
     });
     const error = ref("");
     const store = useStore();
-    const description = computed(() => store.description);
+
     const getSPaceXDescription = async () => {
       try {
         if (store.description.summary === "") {
@@ -49,7 +49,7 @@ export default defineComponent({
       }
     };
     return {
-      description,
+      store,
     };
   },
 });
