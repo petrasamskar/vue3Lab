@@ -1,29 +1,23 @@
-import { createStore } from "vuex";
+import { defineStore } from "pinia";
 import type { SpaceXRocket } from "@/types/SpaceXRocket";
 import type { SpaceXMission } from "@/types/SpaceXMission";
 import type { SpaceXInfo } from "@/types/SpaceXInfo";
-export interface State {
-  rockets: SpaceXRocket[];
-  missions: SpaceXMission[];
-  description: SpaceXInfo;
-}
 
-const store = createStore<State>({
-  state: {
-    rockets: [],
-    missions: [],
-    description: { founder: "", summary: "" },
-  },
-  mutations: {
-    setRockets(state, value) {
-      state.rockets = value;
+export const useStore = defineStore("spacexstore", {
+  state: () => ({
+    rockets: [] as SpaceXRocket[],
+    missions: [] as SpaceXMission[],
+    description: { founder: "", summary: "" } as SpaceXInfo,
+  }),
+  actions: {
+    setRockets(rockets: SpaceXRocket[]) {
+      this.rockets = rockets;
     },
-    setMissions(state, value) {
-      state.missions = value;
+    setMissions(missions: SpaceXMission[]) {
+      this.missions = missions;
     },
-    setDescription(state, value) {
-      state.description = value;
+    setDescription(description: SpaceXInfo) {
+      this.description = description;
     },
   },
 });
-export default store;

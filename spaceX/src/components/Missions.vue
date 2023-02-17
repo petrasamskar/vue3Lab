@@ -17,8 +17,7 @@
 
 <script lang="ts">
 import { defineComponent, computed, ref, onMounted } from "vue";
-import { useStore } from "vuex";
-import type { State } from "../store/store";
+import { useStore } from "../store/store";
 import Mission from "./Mission.vue";
 
 export default defineComponent({
@@ -26,7 +25,7 @@ export default defineComponent({
   components: { Mission },
   setup() {
     const error = ref("");
-    const store = useStore<State>();
+    const store = useStore();
     const opened = ref(false);
 
     const getAllMissions = async () => {
@@ -36,7 +35,7 @@ export default defineComponent({
           if (!data.ok) {
             throw Error("No data available");
           }
-          store.commit("setMissions", await data.json());
+          store.setMissions(await data.json());
         }
         opened.value = !opened.value;
       } catch (err: any) {
@@ -45,7 +44,7 @@ export default defineComponent({
       }
     };
 
-    const missions = computed(() => store.state.missions);
+    const missions = computed(() => store.missions);
     const style = computed(() => (opened.value ? "" : "display:none"));
 
     return {

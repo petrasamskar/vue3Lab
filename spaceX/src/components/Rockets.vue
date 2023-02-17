@@ -18,8 +18,7 @@
 import { defineComponent, computed } from "vue";
 import Rocket from "./Rocket.vue";
 import { ref } from "vue";
-import { useStore } from "vuex";
-import type { State } from "../store/store";
+import { useStore } from "../store/store";
 
 export default defineComponent({
   name: "Rockets",
@@ -27,7 +26,7 @@ export default defineComponent({
   setup() {
     const error = ref("");
     const opened = ref(false);
-    const store = useStore<State>();
+    const store = useStore();
 
     const getAllRockets = async () => {
       try {
@@ -36,7 +35,7 @@ export default defineComponent({
           if (!data.ok) {
             throw Error("No data available");
           }
-          store.commit("setRockets", await data.json());
+          store.setRockets(await data.json());
         }
         opened.value = !opened.value;
       } catch (err: any) {
@@ -45,7 +44,7 @@ export default defineComponent({
       }
     };
 
-    const rockets = computed(() => store.state.rockets);
+    const rockets = computed(() => store.rockets);
     const style = computed(() => (opened.value ? "" : "display:none"));
 
     //rockets.value.push("")
