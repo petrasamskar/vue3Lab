@@ -18,7 +18,7 @@
 <script lang="ts">
 import Rockets from "./components/Rockets.vue";
 import Missions from "./components/Missions.vue";
-import { defineComponent, onMounted, ref } from "vue";
+import { defineComponent, onMounted } from "vue";
 import { useStore } from "./store/store";
 
 export default defineComponent({
@@ -28,26 +28,10 @@ export default defineComponent({
     Missions,
   },
   setup() {
-    onMounted(() => {
-      getSPaceXDescription();
+    onMounted(async () => {
+      await store.getDescription();
     });
-    const error = ref("");
     const store = useStore();
-
-    const getSPaceXDescription = async () => {
-      try {
-        if (store.description.summary === "") {
-          const data = await fetch("https://api.spacexdata.com/v3/info");
-          if (!data.ok) {
-            throw Error("No data available");
-          }
-          store.setDescription(await data.json());
-        }
-      } catch (err: any) {
-        error.value = err.message;
-        console.log(err);
-      }
-    };
     return {
       store,
     };

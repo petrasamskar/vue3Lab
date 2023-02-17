@@ -8,16 +8,50 @@ export const useStore = defineStore("spacexstore", {
     rockets: [] as SpaceXRocket[],
     missions: [] as SpaceXMission[],
     description: { founder: "", summary: "" } as SpaceXInfo,
+    error: "" as string,
   }),
   actions: {
-    setRockets(rockets: SpaceXRocket[]) {
-      this.rockets = rockets;
+    async getDescription() {
+      try {
+        if (this.description.summary === "") {
+          const data = await fetch("https://api.spacexdata.com/v3/info");
+          if (!data.ok) {
+            throw Error("No data available");
+          }
+          this.description = await data.json();
+        }
+      } catch (err: any) {
+        this.error = err.message;
+        console.log(err);
+      }
     },
-    setMissions(missions: SpaceXMission[]) {
-      this.missions = missions;
+    async getAllRockets() {
+      try {
+        if (this.rockets.length === 0) {
+          const data = await fetch("https://api.spacexdata.com/v3/rockets");
+          if (!data.ok) {
+            throw Error("No data available");
+          }
+          this.rockets = await data.json();
+        }
+      } catch (err: any) {
+        this.error = err.message;
+        console.log(err);
+      }
     },
-    setDescription(description: SpaceXInfo) {
-      this.description = description;
+    async getAllMissions() {
+      try {
+        if (this.missions.length === 0) {
+          const data = await fetch("https://api.spacexdata.com/v3/missions");
+          if (!data.ok) {
+            throw Error("No data available");
+          }
+          this.missions = await data.json();
+        }
+      } catch (err: any) {
+        this.error = err.message;
+        console.log(err);
+      }
     },
   },
 });
